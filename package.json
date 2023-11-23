@@ -3,11 +3,14 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "fix:eslint": "eslint --ext .js,.vue resources/js/ --fix --no-error-on-unmatched-pattern"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.4.1",
         "axios": "^1.1.2",
+        "eslint": "^8.54.0",
+        "eslint-plugin-vue": "^9.18.1",
         "laravel-vite-plugin": "^0.8.0",
         "lodash": "^4.17.21",
         "vite": "^4.0.0",
