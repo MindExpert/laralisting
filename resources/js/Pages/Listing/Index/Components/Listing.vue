@@ -2,7 +2,7 @@
   <Box>
     <div>
       <Link
-        :href="route('listing.show', {listing: listing.id})"
+        :href="route('listings.show', {listing: listing.id})"
       >
         <div class="flex items-center gap-1">
           <Price

@@ -38,6 +38,15 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             // Synchronously...
             'appName' => config('app.name'),
+            'flash' => [
+                'message' => fn () => $request->session()->get('message')
+            ],
+            'user' => $request->user() ? [
+                'id' => $request->user()->id,
+                'name' => $request->user()->name,
+                'email' => $request->user()->email,
+                'notificationCount' => $request->user()->unreadNotifications()->count()
+            ] : null,
         ]);
     }
 }
