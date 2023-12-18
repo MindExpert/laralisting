@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Response;
 
 class RealtorListingController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Listing::class, 'listing');
+//        $this->authorizeResource(Listing::class, 'listing');
     }
 
     public function index(Request $request)
@@ -46,7 +48,7 @@ class RealtorListingController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,8 +59,8 @@ class RealtorListingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -81,9 +83,7 @@ class RealtorListingController extends Controller
 
     public function edit(Listing $listing)
     {
-        return inertia(
-            'Realtor/Edit',
-            [
+        return inertia('Realtor/Edit', [
                 'listing' => $listing
             ]
         );
@@ -104,8 +104,7 @@ class RealtorListingController extends Controller
             ])
         );
 
-        return redirect()->route('realtor.listing.index')
-            ->with('success', 'Listing was changed!');
+        return redirect()->route('realtor.listing.index')->with('success', 'Listing was changed!');
     }
 
     public function destroy(Listing $listing)

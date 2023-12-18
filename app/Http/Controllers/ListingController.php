@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -26,20 +27,16 @@ class ListingController extends Controller
         );
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Listing $listing)
     {
-        // if (Auth::user()->cannot('view', $listing)) {
-        //     abort(403);
-        // }
         // $this->authorize('view', $listing);
+
         $listing->load(['images']);
 
-        $offer = !Auth::user() ?
-            null : $listing->offers()->byMe()->first();
+        $offer = Offer::query()
+            ->where('listing_id', $listing->id)
+            ->where('bidder_id', auth()->id())
+            ->first();
 
         return Inertia::render('Listing/Show', [
                 'listing' => $listing,

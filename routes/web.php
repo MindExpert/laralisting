@@ -28,19 +28,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/hello', [IndexController::class, 'show']);
 
-Route::resource('listings', ListingController::class);
+Route::prefix('/listings')
+    ->as('listings.')
+    ->group(function () {
+        Route::get('/', [ListingController::class, 'index'])->name('index');
 
-Route::resource('listing.offer', ListingOfferController::class)->middleware('auth')
-    ->only(['store']);
+        Route::get('/{listing}', [ListingController::class, 'show'])->name('show');
 
-Route::resource('notification', NotificationController::class)
+        Route::get('/{listing}/offers', [ListingController::class, 'offer'])->name('offer');
+
+        Route::post('/', [ListingOfferController::class, 'store'])->name('offers.store')->middleware('auth');
+    });
+
+Route::prefix('/notifications')
+    ->as('notifications.')
     ->middleware('auth')
-    ->only(['index']);
+    ->group(function () {
+        Route::get('/', [ListingController::class, 'index'])->name('index');
 
-Route::put(
-    'notification/{notification}/seen',
-    NotificationSeenController::class
-)->middleware('auth')->name('notification.seen');
+        Route::get('/{notification}/seen', NotificationSeenController::class)->name('seen');
+    });
 
 Route::get('login', [AuthController::class, 'create'])->name('login');
 Route::post('login', [AuthController::class, 'store'])->name('login.store');
@@ -68,12 +75,9 @@ Route::prefix('realtor')
     ->name('realtor.')
     ->middleware(['auth', 'verified'])
     ->group(function () {
-        Route::put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])
-            ->name('listing.restore')
-            ->withTrashed();
+        Route::put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
 
-        Route::resource('listing', RealtorListingController::class)
-            ->withTrashed();
+        Route::resource('listing', RealtorListingController::class)->withTrashed();
 
         Route::put('offer/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offer.accept');
 

@@ -43,7 +43,7 @@ const form = useForm({
 })
 
 const makeOffer = () => form.post(
-  route('listing.offer.store', 
+  route('listings.offers.store',
     { listing: props.listingId },
   ),
   {
@@ -59,7 +59,7 @@ const max = computed(() => Math.round(props.price * 2))
 const emit = defineEmits(['offerUpdated'])
 
 watch(
-  () => form.amount, 
+  () => form.amount,
   debounce((value) => emit('offerUpdated', value), 200),
 )
 </script>
