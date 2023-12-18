@@ -1,26 +1,26 @@
 <template>
-  <Box>
     <div>
-      <Link
-        :href="route('listings.show', {listing: listing.id})"
-      >
-        <div class="flex items-center gap-1">
-          <Price
-            :price="listing.price"
-            class="text-2xl font-bold"
-          />
-          <div class="text-xs text-gray-500">
-            <Price :price="monthlyPayment" /> pm
-          </div>
-        </div>
-        <ListingSpace :listing="listing" class="text-lg" />
-        <ListingAddress
-          :listing="listing"
-          class="text-gray-500"
-        />
-      </Link>
+        <Box>
+            <div>
+                <Link :href="route('listings.show', {listing: listing.id})">
+                    <div class="flex items-center gap-1">
+                        <Price
+                            :price="listing.price"
+                            class="text-2xl font-bold"
+                        />
+                        <div class="text-xs text-gray-500">
+                            <Price :price="monthlyPayment" /> pm
+                        </div>
+                    </div>
+                    <ListingSpace :listing="listing" class="text-lg" />
+                    <ListingAddress
+                        :listing="listing"
+                        class="text-gray-500"
+                    />
+                </Link>
+            </div>
+        </Box>
     </div>
-  </Box>
 </template>
 
 <script setup>
