@@ -42,7 +42,7 @@ Route::prefix('/notifications')
     ->as('notifications.')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/', [ListingController::class, 'index'])->name('index');
+        Route::get('/', [NotificationController::class, 'index'])->name('index');
 
         Route::get('/{notification}/seen', NotificationSeenController::class)->name('seen');
     });

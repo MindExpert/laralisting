@@ -17,16 +17,17 @@ class UserAccountController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::create($request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|confirmed'
-        ]));
-        // $user->save();
+        $user = User::query()
+            ->create($request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:8|confirmed'
+            ]));
+
         Auth::login($user);
+
         event(new Registered($user));
 
-        return redirect()->route('listing.index')
-            ->with('success', 'Account created!');
+        return redirect()->route('listing.index')->with('success', 'Account created!');
     }
 }

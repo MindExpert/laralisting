@@ -12,7 +12,7 @@ class RealtorListingController extends Controller
 {
     public function __construct()
     {
-//        $this->authorizeResource(Listing::class, 'listing');
+        $this->authorizeResource(Listing::class, 'listing');
     }
 
     public function index(Request $request)
@@ -22,17 +22,17 @@ class RealtorListingController extends Controller
             ...$request->only(['by', 'order'])
         ];
 
-        return inertia(
-            'Realtor/Index',
-            [
+        $listings = Listing::query()
+            ->where('by_user_id', auth()->user()->id)
+            ->filter($filters)
+            ->withCount('images')
+            ->withCount('offers')
+            ->paginate(5)
+            ->withQueryString();
+
+        return inertia('Realtor/Index', [
                 'filters' => $filters,
-                'listings' => Auth::user()
-                    ->listings()
-                    ->filter($filters)
-                    ->withCount('images')
-                    ->withCount('offers')
-                    ->paginate(5)
-                    ->withQueryString()
+                'listings' => $listings
             ]
         );
     }

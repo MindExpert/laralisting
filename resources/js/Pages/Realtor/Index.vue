@@ -31,7 +31,7 @@
                         >
                             <a
                                 class="btn-outline text-xs font-medium"
-                                :href="route('listing.show', { listing: listing.id })"
+                                :href="route('listings.show', { listing: listing.id })"
                                 target="_blank"
                             >Preview</a>
                             <Link
