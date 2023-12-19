@@ -68,7 +68,7 @@ const filterForm = reactive({
 })
 watch(
   filterForm, debounce(() => Inertia.get(
-    route('realtor.listing.index'),
+    route('realtors.listings.index'),
     filterForm,
     { preserveState: true, preserveScroll: true },
   ), 1000),

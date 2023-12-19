@@ -52,35 +52,35 @@
 import {useForm} from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
-  filters: Object,
+    filters: Object,
 })
 
 const filterForm = useForm({
-  priceFrom: props.filters.priceFrom ?? null,
-  priceTo: props.filters.priceTo ?? null,
-  beds: props.filters.beds ?? null,
-  baths: props.filters.baths ?? null,
-  areaFrom: props.filters.areaFrom ?? null,
-  areaTo: props.filters.areaTo ?? null,
+    priceFrom: props.filters.priceFrom ?? null,
+    priceTo: props.filters.priceTo ?? null,
+    beds: props.filters.beds ?? null,
+    baths: props.filters.baths ?? null,
+    areaFrom: props.filters.areaFrom ?? null,
+    areaTo: props.filters.areaTo ?? null,
 })
 
 const filter = () => {
-  filterForm.get(
-    route('listings.index'),
-    {
-      preserveState: true,
-      preserveScroll: true,
-    },
-  )
+    filterForm.get(
+        route('listings.index'),
+        {
+            preserveState: true,
+            preserveScroll: true,
+        },
+    )
 }
 
 const clear = () => {
-  filterForm.priceFrom = null
-  filterForm.priceTo = null
-  filterForm.beds = null
-  filterForm.baths = null
-  filterForm.areaFrom = null
-  filterForm.areaTo = null
-  filter()
+    filterForm.priceFrom = null
+    filterForm.priceTo = null
+    filterForm.beds = null
+    filterForm.baths = null
+    filterForm.areaFrom = null
+    filterForm.areaTo = null
+    filter()
 }
 </script>

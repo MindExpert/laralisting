@@ -12,15 +12,16 @@ class RealtorListingImageController extends Controller
     public function create(Listing $listing)
     {
         $listing->load(['images']);
-        return inertia(
-            'Realtor/ListingImage/Create',
-            ['listing' => $listing]
-        );
+
+        return inertia('Realtor/ListingImage/Create', [
+            'listing' => $listing
+        ]);
     }
 
     public function store(Listing $listing, Request $request)
     {
         if ($request->hasFile('images')) {
+
             $request->validate([
                 'images.*' => 'mimes:jpg,png,jpeg,webp|max:5000'
             ], [
@@ -39,9 +40,14 @@ class RealtorListingImageController extends Controller
         return redirect()->back()->with('success', 'Images uploaded!');
     }
 
-    public function destroy($listing, ListingImage $image)
+    public function destroy(Listing $listing, ListingImage $image)
     {
-        Storage::disk('public')->delete($image->filename);
+        // Check if the file exists in the storage folder
+        if (Storage::disk('public')->exists($image->filename)) {
+            // Delete the file from the storage folder
+            Storage::disk('public')->delete($image->filename);
+        }
+
         $image->delete();
 
         return redirect()->back()->with('success', 'Image was deleted!');

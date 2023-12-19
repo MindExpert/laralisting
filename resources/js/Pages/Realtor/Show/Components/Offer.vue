@@ -21,7 +21,7 @@
       <div>
         <Link
           v-if="!isSold"
-          :href="route('realtor.offer.accept', { offer: offer.id })"
+          :href="route('realtors.offers.accept', { offer: offer.id })"
           class="btn-outline text-xs font-medium" 
           as="button" method="put"
         >

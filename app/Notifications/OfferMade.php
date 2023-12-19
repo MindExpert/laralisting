@@ -45,7 +45,7 @@ class OfferMade extends Notification
             ->line("New offer ({$this->offer->amount}) was made for your listing")
             ->action(
                 'See Your Listing',
-                route('realtor.listing.show', ['listing' => $this->offer->listing_id])
+                route('realtors.listings.show', ['listing' => $this->offer->listing_id])
             )
             ->line('Thank you for using our application!');
     }

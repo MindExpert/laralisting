@@ -38,7 +38,7 @@
       >
         <img :src="image.src" class="rounded-md" />
         <Link 
-          :href="route('realtor.listing.image.destroy', { listing: props.listing.id, image: image.id })"
+          :href="route('realtors.listings.image.destroy', { listing: props.listing.id, image: image.id })"
           method="delete"
           as="button"
           class="mt-2 btn-outline text-xs"
@@ -71,7 +71,7 @@ const imageErrors = computed(() => Object.values(form.errors))
 const canUpload = computed(() => form.images.length)
 const upload = () => {
   form.post(
-    route('realtor.listing.image.store', { listing: props.listing.id }),
+    route('realtors.listings.image.store', { listing: props.listing.id }),
     {
       onSuccess: () => form.reset('images'),
     },

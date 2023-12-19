@@ -71,15 +71,39 @@ Route::post('/email/verification-notification', function (Request $request) {
 
 Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
 
-Route::prefix('realtor')
-    ->name('realtor.')
+Route::prefix('realtors')
+    ->name('realtors.')
     ->middleware(['auth', 'verified'])
     ->group(function () {
-        Route::put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
+        Route::prefix('/listings')
+            ->as('listings.')
+            ->group(function () {
+                Route::get('/', [RealtorListingController::class, 'index'])->name('index');
 
-        Route::resource('listing', RealtorListingController::class)->withTrashed();
+                Route::get('/create', [RealtorListingController::class, 'create'])->name('create');
 
-        Route::put('offer/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offer.accept');
+                Route::post('/', [RealtorListingController::class, 'store'])->name('store');
 
-        Route::resource('listing.image', RealtorListingImageController::class)->only(['create', 'store', 'destroy']);
+                Route::get('/{listing}', [RealtorListingController::class, 'show'])->name('show');
+
+                Route::get('/{listing}/edit', [RealtorListingController::class, 'edit'])->name('edit');
+
+                Route::put('/{listing}', [RealtorListingController::class, 'update'])->name('update');
+
+                Route::put('/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
+
+                Route::delete('/{listing}', [RealtorListingController::class, 'destroy'])->name('destroy');
+
+                Route::prefix('/{listing}/image')
+                    ->as('image.')
+                    ->group(function () {
+                        Route::get('/create', [RealtorListingImageController::class, 'create'])->name('create');
+
+                        Route::post('/', [RealtorListingImageController::class, 'store'])->name('store');
+
+                        Route::delete('/{image}', [RealtorListingImageController::class, 'destroy'])->name('destroy');
+                    });
+            });
+
+        Route::put('offers/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offer.accept');
     });

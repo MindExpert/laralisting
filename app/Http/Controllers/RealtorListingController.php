@@ -77,7 +77,7 @@ class RealtorListingController extends Controller
             ])
         );
 
-        return redirect()->route('realtor.listing.index')
+        return redirect()->route('realtors.listings.index')
             ->with('success', 'Listing was created!');
     }
 
@@ -104,7 +104,7 @@ class RealtorListingController extends Controller
             ])
         );
 
-        return redirect()->route('realtor.listing.index')->with('success', 'Listing was changed!');
+        return redirect()->route('realtors.listings.index')->with('success', 'Listing was changed!');
     }
 
     public function destroy(Listing $listing)
