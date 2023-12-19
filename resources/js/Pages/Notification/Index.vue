@@ -10,11 +10,11 @@
             >
                 <div>
                     <span v-if="notification.type === 'App\\Notifications\\OfferMade'">
-                      Offer <Price :price="notification.data.amount" /> for
-                      <Link
-                          :href="route('realtors.listings.show', { listing: notification.data.listing_id })"
-                          class="text-indigo-600 dark:text-indigo-400"
-                      >listing</Link> was made
+                        Offer <Price :price="notification.data.amount" /> for
+                        <Link
+                            :href="route('realtors.listings.show', { listing: notification.data.listing_id })"
+                            class="text-indigo-600 dark:text-indigo-400"
+                        >listing</Link> was made
                     </span>
                 </div>
                 <div>
@@ -49,6 +49,6 @@ import Pagination from '@/Components/UI/Pagination.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
 defineProps({
-  notifications: Object,
+    notifications: Object,
 })
 </script>

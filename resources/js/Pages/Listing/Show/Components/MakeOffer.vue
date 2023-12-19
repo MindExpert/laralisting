@@ -35,21 +35,21 @@ import { computed, watch } from 'vue'
 import { debounce } from 'lodash'
 
 const props = defineProps({
-  listingId: Number,
-  price: Number,
+    listingId: Number,
+    price: Number,
 })
 const form = useForm({
-  amount: props.price,
+    amount: props.price,
 })
 
 const makeOffer = () => form.post(
-  route('listings.offers.store',
-    { listing: props.listingId },
-  ),
-  {
-    preserveScroll: true,
-    preserveState: true,
-  },
+    route('listings.offers.store',
+        { listing: props.listingId },
+    ),
+    {
+        preserveScroll: true,
+        preserveState: true,
+    },
 )
 
 const difference = computed(() => form.amount - props.price)
@@ -59,7 +59,7 @@ const max = computed(() => Math.round(props.price * 2))
 const emit = defineEmits(['offerUpdated'])
 
 watch(
-  () => form.amount,
-  debounce((value) => emit('offerUpdated', value), 200),
+    () => form.amount,
+    debounce((value) => emit('offerUpdated', value), 200),
 )
 </script>

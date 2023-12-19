@@ -63,7 +63,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
     listing: Object,
-});
+})
 
 const form = useForm({
     beds: props.listing.beds,
@@ -74,8 +74,8 @@ const form = useForm({
     code: props.listing.code,
     street_nr: props.listing.street_nr,
     price: props.listing.price,
-});
+})
 
-const update = () => form.put(route('realtors.listings.update', { listing: props.listing.id }));
+const update = () => form.put(route('realtors.listings.update', { listing: props.listing.id }))
 
 </script>

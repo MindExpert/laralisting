@@ -56,6 +56,6 @@ import Offer from '@/Pages/Realtor/Show/Components/Offer.vue'
 const props = defineProps({ listing: Object })
 
 const hasOffers = computed(
-  () => props.listing.offers.length,
+    () => props.listing.offers.length,
 )
 </script>

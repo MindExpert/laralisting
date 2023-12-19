@@ -93,18 +93,18 @@ const interestRate = ref(2.5)
 const duration = ref(25)
 
 const props = defineProps({
-  listing: Object,
-  offerMade: Object,
+    listing: Object,
+    offerMade: Object,
 })
 
 const offer = ref(props.listing.price)
 
 const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(
-  offer, interestRate, duration,
+    offer, interestRate, duration,
 )
 
 const page = usePage()
 const user = computed(
-  () => page.props.value.user,
+    () => page.props.value.user,
 )
 </script>

@@ -9,7 +9,7 @@
                         class="input"
                     />
                     <div v-if="form.errors.name" class="input-error">
-                        {{form.errors.name }}
+                        {{ form.errors.name }}
                     </div>
                 </div>
                 <div class="mt-4">
@@ -19,7 +19,7 @@
                         class="input"
                     />
                     <div v-if="form.errors.email" class="input-error">
-                        {{form.errors.email }}
+                        {{ form.errors.email }}
                     </div>
                 </div>
                 <div class="mt-4">
@@ -69,7 +69,7 @@ const form = useForm({
     email: null,
     password: null,
     password_confirmation: null,
-});
+})
 
-const register = () => form.post(route('user-account.store'));
+const register = () => form.post(route('user-account.store'))
 </script>

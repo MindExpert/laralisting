@@ -17,9 +17,9 @@ import Price from '@/Components/Price.vue'
 import Box from '@/Components/UI/Box.vue'
 
 const props = defineProps({
-  offer: Object,
+    offer: Object,
 })
 const offerMadeOn = computed(
-  () => new Date(props.offer.created_at).toDateString(),
+    () => new Date(props.offer.created_at).toDateString(),
 )
 </script>

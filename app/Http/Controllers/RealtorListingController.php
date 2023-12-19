@@ -39,10 +39,9 @@ class RealtorListingController extends Controller
 
     public function show(Listing $listing)
     {
-        return inertia(
-            'Realtor/Show',
-            ['listing' => $listing->load('offers', 'offers.bidder')]
-        );
+        return inertia('Realtor/Show', [
+                'listing' => $listing->load('offers', 'offers.bidder')
+            ]);
     }
 
     /**
@@ -52,8 +51,9 @@ class RealtorListingController extends Controller
      */
     public function create()
     {
-        // $this->authorize('create', Listing::class);
-        return inertia('Realtor/Create');
+         $this->authorize('create', Listing::class);
+
+         return inertia('Realtor/Create');
     }
 
     /**
@@ -111,8 +111,7 @@ class RealtorListingController extends Controller
     {
         $listing->deleteOrFail();
 
-        return redirect()->back()
-            ->with('success', 'Listing was deleted!');
+        return redirect()->back()->with('success', 'Listing was deleted!');
     }
 
     public function restore(Listing $listing)
