@@ -20,13 +20,9 @@ class ListingOfferController extends Controller
                 ])
             )->bidder()->associate($request->user())
         );
-        $listing->owner->notify(
-            new OfferMade($offer)
-        );
 
-        return redirect()->back()->with(
-            'success',
-            'Offer was made!'
-        );
+        //$listing->owner->notify(new OfferMade($offer));
+
+        return redirect()->back()->with('success', 'Offer was made!');
     }
 }

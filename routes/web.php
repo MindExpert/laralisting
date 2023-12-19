@@ -35,9 +35,7 @@ Route::prefix('/listings')
 
         Route::get('/{listing}', [ListingController::class, 'show'])->name('show');
 
-        Route::get('/{listing}/offers', [ListingController::class, 'offer'])->name('offer');
-
-        Route::post('/', [ListingOfferController::class, 'store'])->name('offers.store')->middleware('auth');
+        Route::post('/{listing}', [ListingOfferController::class, 'store'])->name('offers.store')->middleware('auth');
     });
 
 Route::prefix('/notifications')
