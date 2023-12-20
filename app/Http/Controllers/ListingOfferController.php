@@ -11,7 +11,7 @@ class ListingOfferController extends Controller
 {
     public function store(Listing $listing, Request $request)
     {
-        $this->authorize('view', $listing);
+        abort_if($listing->sold_at !== null, 403, 'Listing is already sold');
 
         $offer = $listing->offers()->save(
             Offer::make(

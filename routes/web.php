@@ -35,7 +35,7 @@ Route::prefix('/listings')
 
         Route::get('/{listing}', [ListingController::class, 'show'])->name('show');
 
-        Route::post('/{listing}', [ListingOfferController::class, 'store'])->name('offers.store')->middleware('auth');
+        Route::post('/{listing}/offer', [ListingOfferController::class, 'store'])->name('offers.store')->middleware('auth');
     });
 
 Route::prefix('/notifications')
@@ -58,7 +58,7 @@ Route::get('/email/verify', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect()->route('listing.index')->with('success', 'Email was verified!');
+    return redirect()->route('listings.index')->with('success', 'Email was verified!');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {
@@ -88,7 +88,7 @@ Route::prefix('realtors')
 
                 Route::put('/{listing}', [RealtorListingController::class, 'update'])->name('update');
 
-                Route::put('/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
+                Route::put('/{listing}/restore', [RealtorListingController::class, 'restore'])->name('restore')->withTrashed();
 
                 Route::delete('/{listing}', [RealtorListingController::class, 'destroy'])->name('destroy');
 
@@ -103,5 +103,5 @@ Route::prefix('realtors')
                     });
             });
 
-        Route::put('offers/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offer.accept');
+        Route::put('offers/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offers.accept');
     });
